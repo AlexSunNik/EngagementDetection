@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import dlib
 from math import hypot
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 
 
 class analysis:
@@ -127,9 +127,9 @@ class analysis:
                         3: 'Sad', 4: 'Surprised', 5: 'Neutral'}
             # if emotion:
             cv2.putText(frame, emotions[self.emotion],
-                        (50, 150), font, 2, (0, 0, 255), 3)
+                        (x, y-50), font, 1, (255, 0, 0), 2)
             cv2.putText(frame, ci,
-                        (50, 250), font, 2, (0, 0, 255), 3)
+                        (x, y-10), font, 1, (255, 0, 0), 2)
             self.x = gaze_ratio_lr
             self.y = gaze_ratio_ud
             self.size = left_eye_ratio
@@ -212,8 +212,8 @@ class analysis:
         concentration_index = (
             emotionweights[self.emotion] * gaze_weights) / 4.5
         if concentration_index > 0.65:
-            return "You are highly engaged!"
+            return "Highly Engaged!"
         elif concentration_index > 0.25 and concentration_index <= 0.65:
-            return "You are engaged."
+            return "Engaged."
         else:
-            return "Pay attention!"
+            return "Distracted"
