@@ -207,8 +207,24 @@ class analysis:
                 gaze_weights = 5
             else:
                 gaze_weights = 2
-
+        # Solely based on eye movement
+        print(self.x, self.y, self.size)
+        if self.size < 0.2:
+            return "Distracted"
+        if self.x < 0.1 or self.x > 1.8:
+            print(self.x)
+            return "Distracted"
+        # if self.y < 0.1 or self.y > 0.7:
+        #     return "Distracted"
+        else:
+            return "Engaged"
 # Concentration index is a percentage : max weights product = 4.5
+        
+        if gaze_weights > 1.5:
+            return "Engaged."
+        else:
+            return "Distracted"
+        # Need to adjust
         concentration_index = (
             emotionweights[self.emotion] * gaze_weights) / 4.5
         if concentration_index > 0.65:
